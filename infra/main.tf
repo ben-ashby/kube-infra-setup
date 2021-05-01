@@ -31,3 +31,8 @@ resource "aws_ecr_repository" "repository" {
 output "kops_state_bucket_name" {
   value = aws_s3_bucket.kops_state.bucket
 }
+
+
+output "repository-url" {
+  value = aws_ecr_repository.repository.repository_url
+}
