@@ -23,6 +23,11 @@ resource "aws_s3_bucket" "kops_state" {
   }
 }
 
+resource "aws_ecr_repository" "repository" {
+  name                 = "container-repo"
+  image_tag_mutability = "MUTABLE"
+}
+
 output "kops_state_bucket_name" {
   value = aws_s3_bucket.kops_state.bucket
 }
