@@ -56,11 +56,18 @@ resource "aws_ecr_repository" "repository" {
   image_tag_mutability = "MUTABLE"
 }
 
-output "kops_state_bucket_name" {
+output "tf_state_bucket" {
   value = aws_s3_bucket.kops_state.bucket
 }
 
+output "kops_state_bucket_name" {
+  value = aws_s3_bucket.tfrmstate.bucket
+}
 
 output "repository-url" {
   value = aws_ecr_repository.repository.repository_url
+}
+
+output "dynamoDb_lock_table_name" {
+  value = aws_dynamodb_table.terraform_statelock.name
 }
