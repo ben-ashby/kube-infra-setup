@@ -12,6 +12,7 @@ kube-secret:
 	kops create secret --state=s3://$(shell cd infra && terraform output kops_state_bucket_name) --name rmit.k8s.local sshpublickey admin -i ~/keys/ec2-key.pub
 
 kube-delete-cluster:
+	aws iam detach-role-policy --role-name nodes.rmit.k8s.local --policy-arn arn:aws:iam::aws:policy/AdministratorAccess | echo "hack"
 	kops delete cluster --state=s3://$(shell cd infra && terraform output kops_state_bucket_name) rmit.k8s.local --yes
 
 kube-deploy-cluster:
