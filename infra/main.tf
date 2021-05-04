@@ -13,10 +13,6 @@ resource "aws_s3_bucket" "kops_state" {
   bucket        = "rmit-kops-state-${random_string.tfstatename.result}"
   acl           = "private"
   force_destroy = true
-  
-  versioning {
-    enabled = true
-  }
 
   tags = {
     Name = "kops remote state"
