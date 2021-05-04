@@ -23,6 +23,34 @@ resource "aws_s3_bucket" "kops_state" {
   }
 }
 
+resource "random_string" "tfstatename" {
+  length  = 6
+  special = false
+  upper   = false
+}
+
+resource "aws_s3_bucket" "tfrmstate" {
+  bucket        = "rmit-tfstate-${random_string.tfstatename.result}"
+  acl           = "private"
+  force_destroy = true
+
+  tags = {
+    Name = "TF remote state"
+  }
+}
+
+resource "aws_dynamodb_table" "terraform_statelock" {
+  name           = "RMIT-locktable-${random_string.tfstatename.result}"
+  read_capacity  = 20
+  write_capacity = 20
+  hash_key       = "LockID"
+
+  attribute {
+    name = "LockID"
+    type = "S"
+  }
+}
+
 resource "aws_ecr_repository" "repository" {
   name                 = "container-repo"
   image_tag_mutability = "MUTABLE"
