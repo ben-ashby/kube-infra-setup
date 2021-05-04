@@ -19,12 +19,6 @@ resource "aws_s3_bucket" "kops_state" {
   }
 }
 
-resource "random_string" "tfstatename" {
-  length  = 6
-  special = false
-  upper   = false
-}
-
 resource "aws_s3_bucket" "tfrmstate" {
   bucket        = "rmit-tfstate-${random_string.tfstatename.result}"
   acl           = "private"
