@@ -47,11 +47,11 @@ resource "aws_ecr_repository" "repository" {
 }
 
 output "tf_state_bucket" {
-  value = aws_s3_bucket.kops_state.bucket
+  value = aws_s3_bucket.tfrmstate.bucket
 }
 
 output "kops_state_bucket_name" {
-  value = aws_s3_bucket.tfrmstate.bucket
+  value = aws_s3_bucket.kops_state.bucket
 }
 
 output "repository-url" {
