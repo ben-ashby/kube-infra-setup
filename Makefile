@@ -27,6 +27,6 @@ kube-config:
 
 ssh-gen:
 	mkdir -p ~/keys
-	yes | ssh-keygen -t rsa -b 4096 -f ~/keys/ec2-key -P ''
+	yes | ssh-keygen -t rsa -b 2048 -f ~/keys/ec2-key -P ''
 	chmod 0644 ~/keys/ec2-key.pub
 	chmod 0600 ~/keys/ec2-key
